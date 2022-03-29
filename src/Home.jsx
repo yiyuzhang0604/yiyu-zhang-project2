@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import './instruction'; 
 
-const {Link, BrowserRouter} = window.ReactRouterDOM
-
 function Home() {
     return (
         <div>
@@ -17,7 +15,7 @@ function Home() {
 
             
             <button>
-                <Link to='/instruction'>Insructions on how to play: </Link>
+                <Link to="/instruction">Insructions on how to play: </Link>
             </button>
             
 
