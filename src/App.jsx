@@ -17,14 +17,14 @@ function App() {
               <nav>
                   <h1>Welcome to Wordle</h1>
                   <l1>
-                  <Link to="/home" className="list">Home</Link>
+                  <Link to="/Home" className="list">Home</Link>
                   
                   </l1>
 
                 <l1>
 
                
-                  <Link to="/instruction" className="list">Instruction</Link>
+                  <Link to="/Instruction" className="list">Instruction</Link>
                   </l1>
 
                 
@@ -36,8 +36,8 @@ function App() {
               </nav>
 
               <Routes>
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/instruction" element={<Instruction />} />
+                  <Route path="/Home" element={<Home />} />
+                  <Route path="/Instruction" element={<Instruction />} />
               </Routes>
             
             
