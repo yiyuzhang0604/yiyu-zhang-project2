@@ -1,35 +1,22 @@
-import './Home.css'; 
-import { useState } from 'react';
-import { Link } from 'react-router-dom'
-import './instruction'; 
+import { useNavigate } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Instruction from "./Instruction";
+import styles from './Home.css'; 
+
+
+
 
 function Home() {
     return (
         <div>
-            <BrowserRouter>
-
-            
-            <div class="title">
-                Welcome to Wordle! 
-            </div>
-
-            
-            <button>
-                <Link to="/instruction">Insructions on how to play: </Link>
-            </button>
-            
-
-            <div class="title">
-                Choose your difficulty
-            </div>
-
-            <button>Easy</button>
-            <button>Medium</button>
-            <button>Hard</button>
-            </BrowserRouter>
-
+        <button className={styles.button}>Easy</button>
+        <button>Medium</button>
+        <button>Hard</button>
 
         </div>
+   
+
+
     ); 
 }
 

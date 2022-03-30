@@ -1,11 +1,14 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
-import Home from './Home.jsx'; 
+import App from './App.jsx';
 import './index.css'; 
 
 
 
 ReactDOM.render(
-    <Home />, 
+    <React.StrictMode>
+
+    <App />
+    </React.StrictMode>, 
     document.getElementById('root')
 ); 
