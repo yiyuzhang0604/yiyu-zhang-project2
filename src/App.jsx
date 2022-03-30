@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from './Home'; 
-import Instruction from './Instruction';
+import Home from './Home.jsx'; 
+import Instruction from './Instruction.jsx';
 import './Home.css'; 
 
 
