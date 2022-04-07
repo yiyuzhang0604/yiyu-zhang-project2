@@ -1,17 +1,47 @@
 import React from 'react'; 
-import { useNavigate } from 'react-router-dom'; 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import styles from './Home.css'; 
-
-
-
+import EasyGame from './easyGame';
+import Instruction from './instruction';
+import './index.css'; 
 
 function Home() {
     return (
         <div>
-        <button className={styles.button}>Easy</button>
-        <button>Medium</button>
-        <button>Hard</button>
+        <div className="app">
+            <Router>
+
+              <nav>
+                  <h1>Welcome to Wordle</h1>
+                  <l1>
+                  <Link to="/home" className="list">Home</Link>
+                  
+                  </l1>
+
+                  <l1>
+                  <Link to="/easyGame" className="list">EasyGame</Link>
+                  
+                  </l1>
+
+
+
+                <l1>
+
+               
+                  <Link to="/instruction" className="list">Instruction</Link>
+                  </l1>
+                  
+              </nav>
+
+              <Routes>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/easyGame" element={<EasyGame />} />
+                  <Route path="/instruction" element={<Instruction />} />
+              </Routes>
+            
+            
+            </Router>
+
+          </div>
 
         </div>
    

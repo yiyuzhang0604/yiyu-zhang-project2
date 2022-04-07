@@ -1,55 +1,106 @@
 import React from 'react'; 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './Home'; 
-import Instruction from './instruction';
-import './Home.css'; 
+import {createContext} from 'react'; 
+import { defaultBoard } from './defaultBoard';
+import { useState, useEffect } from 'react';
+import Board from './Board'; 
+import KeyBoard from './keyboard';
+import './index.css'; 
+import GameOver from './gameOver';
 
+
+export const AppContext = createContext(); 
 
 
 
 function App() {
-  return (
-      <div>
-          <div className="app">
-            <Router>
+    const[board, setBoard] = useState(defaultBoard); 
+    const[currentAttempt, setCurrentAttempt] = useState({attempt: 0, position: 0}); 
+    const wordsOptions = ["RIGHT","ABORT","POINT","JESUS",
+                          "CABIN","COURT","ABOUT","EARTH",
+                          "FINAL","ERROR"]; 
 
-            
-              <nav>
-                  <h1>Welcome to Wordle</h1>
-                  <l1>
-                  <Link to="/home" className="list">Home</Link>
-                  
-                  </l1>
 
-                <l1>
+    
+    const[word, setWord] = useState(""); 
+    const[gameOver, setGameOver] = useState({gameOver: false, win: false}); 
 
-               
-                  <Link to="/instruction" className="list">Instruction</Link>
-                  </l1>
 
-                
-                  
-                 
+    useEffect(() => {
+      setWord(wordsOptions[Math.floor(Math.random() * wordsOptions.length)]);
+    },[]); 
+    console.log(word); 
 
-                  
-                  
-              </nav>
 
-              <Routes>
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/instruction" element={<Instruction />} />
-              </Routes>
-            
-            
-            </Router>
 
-          </div>
-          
+    //functions that handle picking letter event 
+    const onPickLetter = (val) => {
+      if(currentAttempt.attempt > 6) return; 
+      // get current letter 
+      const currBoard = [...board];
+      currBoard[currentAttempt.attempt][currentAttempt.position] = val
+      setBoard(currBoard);
+      setCurrentAttempt({...currentAttempt, position: currentAttempt.position + 1}); 
 
-      </div>
+    }
 
+    // functions that handle delete event 
+    const onDelete =() => {
+      if(currentAttempt.position === 0) return; 
+      const currBoard = [...board];
+      currBoard[currentAttempt.attempt][currentAttempt.position - 1] = ""; 
+      setBoard(currBoard); 
+      setCurrentAttempt({...currentAttempt, position: currentAttempt.position - 1 }); 
+
+
+    }
+    // functions that handle enter event 
+    const onEnter = () => {
+      if (currentAttempt.position !== 5) {
+        alert("You need to enter 5 letters"); 
+        return; 
+    }
+    // update the attempt count
+    setCurrentAttempt({attempt: currentAttempt.attempt + 1, position:0}); 
+
+    let currWord = ""; 
+    for (let i = 0; i < 5; i++) {
+      currWord += board[currentAttempt.attempt][i]; 
+    }
+
+    if (currWord === word) {
+      alert("You won the game"); 
+      setGameOver({gameOver: true, won: true}); 
+      return; 
       
-  );
+
+    }
+
+    }
+    return(
+        <div className="app">
+            <AppContext.Provider value={{board, 
+                                        setBoard, 
+                                        currentAttempt, 
+                                        setCurrentAttempt, 
+                                        onPickLetter,
+                                        onDelete,
+                                        onEnter,
+                                        word,
+                                        gameOver,
+                                        setGameOver}}>
+              <div className="center">
+                <Board />
+                <KeyBoard />
+
+              </div>
+            
+            
+
+            </AppContext.Provider>
+        </div>
+
+    )
+
 }
 
 export default App; 
